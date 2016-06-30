@@ -5,8 +5,13 @@ var _     = require('lodash')
 
 module.exports = {
   browse: function(username) {
-    return agent
+    var deferred = q.defer();
+
+    agent
       .get('https://www.instagram.com/'+username)
+      .end(deferred.makeNodeResolver());
+      
+    return deferred.promise   
       .then(function(response) {
         var re = /<script\b[^>]*>([\s\S]*?)<\/script>/gm
           , match
