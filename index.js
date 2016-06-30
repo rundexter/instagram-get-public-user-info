@@ -25,13 +25,14 @@ module.exports = {
 
         if(window._sharedData) {
           var user = _.get(window._sharedData, 'entry_data.ProfilePage.0.user'); 
+          console.log(require('util').inspect(user, {depth: 5}));
           return {
             username          : _.get(user, 'username')
             , full_name       : _.get(user, 'full_name')
             , profile_picture : _.get(user, 'profile_pic_url')
             , bio             : _.get(user, 'biography')
             , website         : _.get(user, 'external_url')
-            , media           : _.get(user, 'counts.media')
+            , media           : _.get(user, 'media.count')
             , follows         : _.get(user, 'follows.count')
             , followed_by     : _.get(user, 'followed_by.count')
           };
